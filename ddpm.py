@@ -33,6 +33,11 @@ class Diffusion:
         Ɛ = torch.randn_like(x)
         return sqrt_alpha_hat * x + sqrt_one_minus_alpha_hat * Ɛ, Ɛ
 
+        # sqrt_alpha_hat = torch.sqrt(self.alpha_hat[t]).view(4, 1, 1, 1)
+        # sqrt_one_minus_alpha_hat = torch.sqrt(1 - self.alpha_hat[t]).view(4, 1, 1, 1)
+        # Ɛ = torch.randn_like(x)
+        # test = sqrt_alpha_hat * x + sqrt_one_minus_alpha_hat * Ɛ, Ɛ
+
     def sample_timesteps(self, n):
         return torch.randint(low=1, high=self.noise_steps, size=(n,))
 
@@ -97,9 +102,9 @@ def launch():
     args = parser.parse_args()
     args.run_name = "DDPM_Uncondtional"
     args.epochs = 500
-    args.batch_size = 12
+    args.batch_size = 4
     args.image_size = 64
-    args.dataset_path = r"C:\Users\dome\datasets\landscape_img_folder"
+    args.dataset_path = r"D:\HaowenWei\Data\Diffusion_Image\landscape_images"
     args.device = "cuda"
     args.lr = 3e-4
     train(args)
